@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Circle Color Picker</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* The Circle Container */
+        .circle-frame {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 20px solid #808080; /* Default Outer Color */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: border-color 0.2s;
+        }
+
+        .section {
+            flex: 1;
+            transition: background-color 0.2s;
+        }
+
+        /* The Middle Divider */
+        .divider {
+            height: 20px;
+            background-color: #808080; /* Matches Outer Color */
+        }
+
+        /* Control Panel */
+        .controls {
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            color: #555;
+        }
+
+        input[type="color"] {
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            border: none;
+            background: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="circle-frame" id="mainCircle">
+        <div class="section" id="topSection" style="background-color: #1a1a1a;"></div>
+        <div class="divider" id="middleDivider"></div>
+        <div class="section" id="bottomSection" style="background-color: #003366;"></div>
+    </div>
+
+    <div class="controls">
+        <div class="control-group">
+            <label>Outer Frame</label>
+            <input type="color" id="outerPick" value="#808080">
+        </div>
+        <div class="control-group">
+            <label>Top Half</label>
+            <input type="color" id="topPick" value="#1a1a1a">
+        </div>
+        <div class="control-group">
+            <label>Bottom Half</label>
+            <input type="color" id="bottomPick" value="#003366">
+        </div>
+        <div class="control-group" style="justify-content: center; opacity: 0.5;">
+            <span>HEX Codes</span>
+        </div>
+    </div>
+
+    <script>
+        const outerPick = document.getElementById('outerPick');
+        const topPick = document.getElementById('topPick');
+        const bottomPick = document.getElementById('bottomPick');
+
+        const mainCircle = document.getElementById('mainCircle');
+        const topSection = document.getElementById('topSection');
+        const bottomSection = document.getElementById('bottomSection');
+        const middleDivider = document.getElementById('middleDivider');
+
+        // Update Outer Frame and Middle Divider
+        outerPick.addEventListener('input', (e) => {
+            mainCircle.style.borderColor = e.target.value;
+            middleDivider.style.backgroundColor = e.target.value;
+        });
+
+        // Update Top Section
+        topPick.addEventListener('input', (e) => {
+            topSection.style.backgroundColor = e.target.value;
+        });
+
+        // Update Bottom Section
+        bottomPick.addEventListener('input', (e) => {
+            bottomSection.style.backgroundColor = e.target.value;
+        });
+    </script>
+
+</body>
+</html>
